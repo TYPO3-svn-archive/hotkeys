@@ -193,7 +193,7 @@ shortcut = {
 					}
 					return false;
 				}
-			}						
+			}
 		}
 		this.all_shortcuts[shortcut_combination] = {
 			'callback':func, 
@@ -201,18 +201,9 @@ shortcut = {
 			'event': opt['type']
 		};
 		//Attach the function with the event
-		if(ele.addEventListener){ 
-		alert('eins');
-			ele.addEventListener(opt['type'], func, false);
-		}else{
-			if(ele.attachEvent){
-				ele.attachEvent('on'+opt['type'], func);
-				alert('zwei');
-			}else{
-				ele['on'+opt['type']] = func;
-				alert('drei');
-			}
-		}
+		if(ele.addEventListener) ele.addEventListener(opt['type'], func, false);
+		else if(ele.attachEvent) ele.attachEvent('on'+opt['type'], func);
+		else ele['on'+opt['type']] = func;
 	},
 
 	//Remove the shortcut - just specify the shortcut and I will remove the binding
