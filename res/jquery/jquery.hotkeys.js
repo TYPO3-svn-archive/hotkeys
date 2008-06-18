@@ -25,9 +25,6 @@ USAGE:
     $.hotkeys.remove('Ctrl+c', {target:'div#editor', type:'keypress'}); 
     
 ******************************************************************************************************************************/
-jQuery.noConflict();
-
-
 (function (jQuery){
     this.version = '(beta)(0.0.3)';
 	this.all = {};

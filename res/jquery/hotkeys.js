@@ -24,15 +24,32 @@
   * TYPO3 Backend Hotkeys
   *
   * @author Julian Kleinhans <typo3@kj187.de>
+  
+	The syntax is as follows:
+	
+	$.hotkeys.add(<key>,<options>, <handler>);
+	$.hotkeys.remove(<key>, <options>);
+	
+	$.hotkeys.add('Ctrl+a', {target:'div.select', type: 'keyup'}, function(){ });
+	$.hotkeys.remove('Ctrl+a', {target: 'div.select'});
+	
+	Or you can use default options as:
+	
+	$.hotkeys.add(<key>, <handler>)
+	$.hotkeys.remove(<key>)
+	
+	i.e.
+	$.hotkeys.add('Ctrl+a',function(){ });
+	$.hotkeys.remove('Ctrl+a');
+	
+	The default options are:
+	
+	{type: 'keydown', propagate: false, disableInInput: false, target: jQuery('html')[0]}  
 */
 
-jQuery(document).ready(function(){
-    jQuery.hotkeys.add('return',function (){ top.goToModule('web_list',1,'&id=43');return false;});
-    jQuery.hotkeys.add('Ctrl+l',function (){ top.goToModule('web_list');return false;} );
-    jQuery.hotkeys.add('Ctrl+p',function (){ top.goToModule('web_layout');return false;} );
-    jQuery.hotkeys.add('Ctrl+v',function (){ top.goToModule('web_view');return false;} );
-    jQuery.hotkeys.add('Ctrl+t',function (){ top.goToModule('web_ts');return false;} );
-    jQuery.hotkeys.add('Ctrl+a',function (){ top.goToModule('web_perm');return false;} );
-    jQuery.hotkeys.add('Ctrl+f',function (){ top.goToModule('web_func');return false;} );    
-    jQuery.hotkeys.add('Ctrl+i',function (){ top.goToModule('web_info');return false;} );    
-});
+
+function domo(){
+    jQuery.hotkeys.add('1',{type: 'keydown', propagate: true, disableInInput: true},function (){ top.goToModule('web_list',1,'&id=43')});
+}
+
+jQuery(document).ready(domo);

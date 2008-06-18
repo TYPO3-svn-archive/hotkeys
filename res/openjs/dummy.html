@@ -15,8 +15,19 @@
 		},{
 			'type':'keydown',
 			'propagate':true,
+			'disable_in_input':true,
 			'target':document
 		});
+		
+		
+		shortcut.add("b",function() {
+			alert("b doesnt work");
+		},{
+			'type':'keydown',
+			'propagate':true,
+			'disable_in_input':true,
+			'target':document
+		});		
 		
 	}
 	
@@ -27,5 +38,7 @@
 </head>
 <body >
 Testseite mit Shortcutfunktion
+
+<textarea style="height:150px;width:300px;"></textarea>
 </body>
 </html>
