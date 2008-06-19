@@ -27,6 +27,18 @@ shortcut = {
 		var ths = this;
 		shortcut_combination = shortcut_combination.toLowerCase();
 
+
+
+
+
+
+
+
+
+
+
+
+
 		//The function to be called at keypress
 		var func = function(e) {
 			e = e || window.event;
@@ -44,6 +56,10 @@ shortcut = {
 			if (e.keyCode) code = e.keyCode;
 			else if (e.which) code = e.which;
 			var character = String.fromCharCode(code);
+			
+			
+			
+			
 			
 			if(code == 188) character=","; //If the user presses , when the type is onkeydown
 			if(code == 190) character="."; //If the user presses , when the type is onkeydown
@@ -195,6 +211,17 @@ shortcut = {
 				}
 			}
 		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		this.all_shortcuts[shortcut_combination] = {
 			'callback':func, 
 			'target':ele, 

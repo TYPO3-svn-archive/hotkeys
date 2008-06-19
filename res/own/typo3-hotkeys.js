@@ -1,3 +1,40 @@
+/***************************************************************
+*  Copyright notice
+*
+*  (c) 2008 Julian Kleinhans <typo3@kj187.de>
+*  All rights reserved
+*
+*  This script is part of the TYPO3 project. The TYPO3 project is
+*  free software; you can redistribute it and/or modify
+*  it under the terms of the GNU General Public License as published by
+*  the Free Software Foundation; either version 2 of the License, or
+*  (at your option) any later version.
+*
+*  The GNU General Public License can be found at
+*  http://www.gnu.org/copyleft/gpl.html.
+*  A copy is found in the textfile GPL.txt and important notices to the license
+*  from the author is found in LICENSE.txt distributed with these scripts.
+*
+*
+*  This script is distributed in the hope that it will be useful,
+*  but WITHOUT ANY WARRANTY; without even the implied warranty of
+*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*  GNU General Public License for more details.
+*
+*  This copyright notice MUST APPEAR in all copies of the script!
+***************************************************************/
+
+/**
+  * TYPO3 Backend Hotkeys
+  * TODO: ADD DESCRIPTION
+  * 
+  * Inspired by openjs from By Binny V A
+  * http://www.openjs.com/scripts/events/keyboard_shortcuts/
+  *
+  * @author Julian Kleinhans <typo3@kj187.de>
+
+  */
+  
 if(typeof(Prototype) == "undefined")
 	throw "HotKey requires Prototype to be loaded.";
 
@@ -15,19 +52,37 @@ var TYPO3BackendHotkeys = {
 		DOMElement = options.target;
 		if(typeof options.target == 'string') DOMElement = document.getElementById(options.target);
 		
+		// string to lower
+		userShortcut = userShortcut.toLowerCase();		
+		
+		
+		
 		
 		//The function to be called at keypress
-		var TYPO3CallbackFunc = function(e){
+		var TYPO3CallbackFunc = function(eventObj){
+			if(!eventObj) eventObj = window.event;
 			
+			// TODO Enable hotkeys in forms
+			
+			// Find which key is pressed
+			if(eventObj.keyCode){
+				pressedKey = eventObj.keyCode; 
+			}else if(eventObj.which){
+				pressedKey = eventObj.which;
+			}
+			
+			var character = String.fromCharCode(pressedKey);
+			alert(character);
+			
+						
+					
 		}
-
 		
-		Event.observe(document, 'keydown', function(event) {		
-			var character = String.fromCharCode(event.keyCode);
-			alert('keyCode: '+event.keyCode+' Character: '+character+' - shortcutCom: '+shortcut_combination);					
-		});
 		
-				
+		// add eventListener
+		document.observe('dom:loaded', function () {
+			Event.observe(document, 'keydown', TYPO3CallbackFunc);
+		});					
 	},
 	
 	/**
