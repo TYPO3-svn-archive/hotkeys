@@ -1,34 +1,82 @@
 if(typeof(Prototype) == "undefined")
 	throw "HotKey requires Prototype to be loaded.";
 
-var Hotkeys = Class.create({
+var TYPO3BackendHotkeys = {
 
 	/**
 	 * registers for hotkey event listener and executes on DOM ready
 	 */
-	initialize: function() {		
-		Event.observe(document, 'keydown', function(event) {
+	add: function(userShortcut, callback, options) {	
 		
+		// init options			
+		options = this.initOptions(options);
+		
+		// get DOM Element
+		DOMElement = options.target;
+		if(typeof options.target == 'string') DOMElement = document.getElementById(options.target);
+		
+		
+		//The function to be called at keypress
+		var TYPO3CallbackFunc = function(e){
+			
+		}
+
+		
+		Event.observe(document, 'keydown', function(event) {		
 			var character = String.fromCharCode(event.keyCode);
-			
-			
-			alert(character+' - '+event.keyCode);
-		});		
+			alert('keyCode: '+event.keyCode+' Character: '+character+' - shortcutCom: '+shortcut_combination);					
+		});
+		
+				
 	},
 	
-	initMapping: function(){
+	/**
+	 * initialize options
+	 */
+	initOptions: function(options){		
+		// Set default options
+		var defaultOptions = {
+			'type':'keydown',
+			'disableInForms':true,
+			'target':document,
+			'keycode':false
+		}
 		
+		if(!options){
+			options = defaultOptions;
+		}else {
+			for(var value in defaultOptions) {				
+				if(typeof options[value] == 'undefined'){
+					options[value] = defaultOptions[value];
+				}
+			}
+		}				
+		return options;		
 	},
-});
 
-var TYPO3BackendHotkeys = new Hotkeys();
+};
 
 
+TYPO3BackendHotkeys.add("A", function(){alert('JIJIJIJI');});
 
 
 /*
 
-			//Work around for stupid Shift key bug created by using lowercase - as a result the shift+num combination was broken
+    this.special_keys = {
+        27: 'esc', 9: 'tab', 32:'space', 13: 'return', 8:'backspace', 145: 'scroll', 20: 'capslock', 
+        144: 'numlock', 19:'pause', 45:'insert', 36:'home', 46:'del',35:'end', 33: 'pageup', 
+        34:'pagedown', 37:'left', 38:'up', 39:'right',40:'down', 112:'f1',113:'f2', 114:'f3', 
+        115:'f4', 116:'f5', 117:'f6', 118:'f7', 119:'f8', 120:'f9', 121:'f10', 122:'f11', 123:'f12'};
+        
+    this.shift_nums = { "`":"~", "1":"!", "2":"@", "3":"#", "4":"$", "5":"%", "6":"^", "7":"&", 
+        "8":"*", "9":"(", "0":")", "-":"_", "=":"+", ";":":", "'":"\"", ",":"<", 
+        ".":">",  "/":"?",  "\\":"|" };
+
+			
+			  
+			 
+			  
+			 ///Work around for stupid Shift key bug created by using lowercase - as a result the shift+num combination was broken
 			var shift_nums = {
 				"`":"~",
 				"1":"!",
